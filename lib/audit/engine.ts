@@ -20,10 +20,10 @@ export async function auditTechStack(input: TechAuditInput): Promise<TechAuditRe
     const redundancies = identifyRedundancies(input.selectedTools);
 
     // 3. Find optimization opportunities
-    const optimizations = findOptimizations(input.selectedTools, input);
+    const optimizations = findOptimizations(input.selectedTools);
 
     // 4. Calculate efficiency score
-    const score = calculateEfficiencyScore(input, redundancies, optimizations);
+    const score = calculateEfficiencyScore(input, redundancies);
 
     // 5. Generate AI recommendations
     const recommendations = await generateRecommendations(input, redundancies, optimizations);
@@ -136,7 +136,7 @@ function findRedundantPairs(tools: SelectedTool[], category: string): Redundancy
   return redundancies;
 }
 
-function findOptimizations(tools: SelectedTool[], input: TechAuditInput): Optimization[] {
+function findOptimizations(tools: SelectedTool[]): Optimization[] {
   const optimizations: Optimization[] = [];
 
   // Cost optimizations
@@ -177,8 +177,7 @@ function findOptimizations(tools: SelectedTool[], input: TechAuditInput): Optimi
 
 function calculateEfficiencyScore(
   input: TechAuditInput, 
-  redundancies: Redundancy[], 
-  optimizations: Optimization[]
+  redundancies: Redundancy[]
 ): number {
   let score = 100;
 
@@ -278,6 +277,10 @@ function createSummary(redundancies: Redundancy[], optimizations: Optimization[]
 // Helper function to get available tools from database
 export async function getAvailableTools(): Promise<Tool[]> {
   try {
+    if (!supabaseAdmin) {
+      console.warn('Supabase admin client not initialized');
+      return [];
+    }
     const { data: tools, error } = await supabaseAdmin
       .from('tools')
       .select('*')

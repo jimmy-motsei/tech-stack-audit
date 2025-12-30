@@ -1,6 +1,6 @@
 "use client";
 
-import { DollarSign, TrendingUp, AlertTriangle } from 'lucide-react';
+import { TrendingUp, AlertTriangle } from 'lucide-react';
 import { TechAuditResult } from '@/types';
 
 function getScoreColor(score: number) {

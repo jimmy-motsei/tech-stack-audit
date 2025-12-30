@@ -9,7 +9,7 @@ interface ToolSelectionInterfaceProps {
   selectedTools: SelectedTool[];
   onAddTool: (tool: Tool) => void;
   onRemoveTool: (toolId: string) => void;
-  onUpdateTool: (toolId: string, field: keyof SelectedTool, value: any) => void;
+  onUpdateTool: (toolId: string, field: keyof SelectedTool, value: unknown) => void;
 }
 
 export function ToolSelectionInterface({

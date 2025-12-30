@@ -50,7 +50,7 @@ export default function Home() {
     setSelectedTools(selectedTools.filter(tool => tool.toolId !== toolId));
   };
 
-  const updateTool = (toolId: string, field: keyof SelectedTool, value: any) => {
+  const updateTool = (toolId: string, field: keyof SelectedTool, value: unknown) => {
     setSelectedTools(selectedTools.map(tool => 
       tool.toolId === toolId ? { ...tool, [field]: value } : tool
     ));
