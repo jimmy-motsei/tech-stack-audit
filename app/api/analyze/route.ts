@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+
+export const dynamic = 'force-dynamic';
+
 import { auditTechStack } from '@/lib/audit/engine';
 import { supabaseAdmin } from '@/lib/database';
 
